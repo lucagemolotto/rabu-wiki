@@ -1,0 +1,11 @@
+site_name: Robo-AbU Docs
+nav:
+  - Robo-AbU: rabu.md
+  - Tools: 
+    - About: tools/tools.md
+    - AbU Monitor: tools/abumon.md
+    - AbU Simulator: tools/abusim.md
+    - goROSetta/goMavUtil: tools/gorosetta.md
+  - Development: 
+    - Contributing: contributing.md
+theme: readthedocs
