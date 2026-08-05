@@ -2,6 +2,31 @@
 The repository for Robo-Abu can be found [here]().
 It is divided different logical modules
 
+## Setup
+Robo-AbU depends on TII-UAE's [rclgo](https://github.com/tiiuae/rclgo), as such it currently support only ROS2 Humble.
+
+Once ROS2 Humble is setup, install the custom ROS2 messages for Robo-AbU and goROSetta.
+```
+# build the messages
+cd /PATH_TO_ROBOABU/aburos_msgs/ && source /opt/ros/humble/setup.bash && colcon build
+# put the source command in the shell startup, bash is given as an example, use .zshrc if you use zsh
+echo 'source /PATH_TO_ROBOABU/aburos_msgs/install/setup.bash' >> ~/.bashrc 
+
+# do the same for gorosetta
+cd /PATH_TO_GOROSETTA/goROSetta_msgs/ && source /opt/ros/humble/setup.bash && colcon build
+echo 'source /PATH_TO_GOROSETTA/goROSetta_msgs/install/setup.bash' >> ~/.bashrc
+``` 
+
+And generate the CGO bindings for the messages
+```
+source /opt/ros/humble/setup.bash && source /home/aislab/aburos/aburos_msgs/install/setup.bash && source /home/aislab/goROSetta/goROSetta_msgs/install/setup.bash && go run github.com/tiiuae/rclgo/cmd/rclgo-gen generate -d /PATH_TO_ROBOABU/msgs --message-module-prefix "github.com/Autonomous-Systems-Laboratory-UNIUD/aburos/msgs"
+
+## only needed if developing for goROSetta too
+source /opt/ros/humble/setup.bash && source /home/aislab/goROSetta/goROSetta_msgs/install/setup.bash && go run github.com/tiiuae/rclgo/cmd/rclgo-gen generate -d /PATH_TO_GOROSETTA/ROSetta/msgs --message-module-prefix "github.com/Autonomous-Systems-Laboratory-UNIUD/goROSetta/ROSetta/msgs"
+```
+
+Alternatively, one can use the provided devcontainer available [here](https://github.com/Autonomous-Systems-Laboratory-UNIUD/AbU-ROS-devcontainer) and attach to it via Visual Studio Code.
+
 ## Modules
 ### agent
 Implementations of different agents for the transaction mananager. They should all be implementations of the `RoboAbuAgent` interface.
