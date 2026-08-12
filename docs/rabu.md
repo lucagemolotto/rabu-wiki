@@ -130,3 +130,17 @@ Lastly, we loop the executor and use inputs for interacting with the system with
 * ArduPlane (WIP)
 * ArduRover
 * ArduSub
+
+## Physical Attributes
+| Attribute                            | Components     | Type |        | Example Value           | Description                                                                                                           |
+| -------------------------------- | --------------- | ----------------------- | ---- | --- |
+| move | move_x, move_y, move_z | Output - Float | (3.0, -1.1, 2.4) | Forward-Right-Down (vehicle-centric) movement of the vehicle in meters |
+| mode | - | Input - Text | "GUIDED" | Current Autopilot mode of the vehicle | 
+| set_mode | - | Output - Text | "GUIDED" | Sends to the autopilot the desidered mode |
+| arm | - | Input - Bool | false | Current arming state of the vehicle's motors |
+| set_arm | - | Output - Bool | true | Sets the arming state of the vehicle's motors |
+| altitude | - | Input - Float | 5.0 | Altitude of the vehicle relative to the ground (Copter/Plane only) |
+| take_off | - | Output - Float | 5.0 | Altitude of the vehicle relative to the ground (Copter only) |
+| depth | - | Input - Float | 3.2 | Depth of the vehicle relative to the water surface (Sub only) |
+| position | position_lat, position_lon, position_alt | | Current GNSS coordinates of the vehicle. Latitude and longitude are specificied in WGS84 and multiplied by 10e7. Altitude is meters above average sea level (ASL). |
+| set_position | setposition_lat, setposition_lon, setposition_alt | | Sends to the autopilot the desidered GNSS coordinates of the vehicle. Latitude and longitude are specificied in WGS84 and multiplied by 10e7. Altitude is meters above average sea level (ASL). |
