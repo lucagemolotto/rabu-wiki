@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>AbU Simulator - Robo-AbU Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "AbU Simulator";
+        var mkdocs_page_input_path = "tools/abusim.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Robo-AbU Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../rabu/">Robo-AbU</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tools</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../tools/">About</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../abumon/">AbU Monitor</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">AbU Simulator</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#agent">Agent</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#coordinator">Coordinator</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ui">UI</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gorosetta/">goROSetta/goMavUtil</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../contributing/">Contributing</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Robo-AbU Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Tools</li>
+      <li class="breadcrumb-item active">AbU Simulator</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="abu-simulator">AbU Simulator</h2>
+<p>For simulation purposes we also provide a centralized simulator, called <code>abusim</code>.</p>
+<p>It is made up of three components:
+* <code>abusim-agent</code>
+* <code>abusim-coordinator</code>
+* AbU-sim UI</p>
+<h3 id="agent">Agent</h3>
+<p>Agents get their configuration on startup via an <code>AgentConfiguration</code> provided via ENV.
+Currently supports <code>Copter</code>, <code>Rover</code>, <code>Plane</code>, <code>Sub</code>, <code>Static</code>, <code>Basic</code>.</p>
+<h3 id="coordinator">Coordinator</h3>
+<p>The coordinator manages the agents, it spawns and deletes their containers. It also acts as a proxy for (Input) rules.
+It can be interacted with via the <a href="abusim#ui">UI</a>, or via JSON/HTTP APIs.</p>
+<pre><code>APIs Definition
+
+AddNode 
+    endpoint: POST(&quot;/api/nodes&quot;)
+    type: JSON { resource_type, id, rulesets {name1(str): NIL, name2: NIL, ...}, memory{(str):(int,float,bool,string)} }
+RemoveNode
+    endpoint: DELETE(&quot;/api/nodes/:nodename&quot;)
+GetNode:
+    endpoint: GET(&quot;/api/nodes/:nodename&quot;)
+    type: JSON { resource_type, id, rulesets {name1(str): NIL, name2: NIL, ...}, memory{(str):(int,float,bool,string)} }
+GetNodeState:
+    endpoint: GET(&quot;/api/nodes/memory/:nodename&quot;)
+    type: JSON { memory{(str):(int,float,bool,string)} }
+(FUTURE) GetNodeLogs:
+    endpoint: GET(&quot;/api/nodes/memory/:nodename&quot;)
+    type: JSON { memory{(str):(int,float,bool,string)} }
+
+AddSet
+    endpoint: POST(&quot;/api/rulesets/&quot;)
+    type JSON { id: str, rules: []rule}
+    type rule : {name: str, event: str, cndtype: &quot;for&quot;/&quot;for-all&quot;, condition: str, action: str}
+RemoveSet
+    endpoint: DELETE(&quot;/api/rulesets/:setname&quot;)
+GetSets
+    endpoint: GET(&quot;/api/rulesets/&quot;)
+    type JSON []{ id: str, rules: []rule}
+
+StartNode:
+    endpoint: GET(&quot;/api/sim/start/:nodename&quot;)
+StopNode:
+    endpoint: GET(&quot;/api/sim/stop/:nodename&quot;)
+StartSim:
+    endpoint: GET(&quot;/api/sim/start/&quot;)
+StopSim:
+    endpoint: GET(&quot;/api/sim/stop/&quot;)
+NodeInput:
+    endpoint: POST(&quot;/api/sim/input/&quot;)
+    type: JSON { id: str, input: [](var(str),val(int,float,bool,string)) }
+</code></pre>
+<h3 id="ui">UI</h3>
+<p>The UI is served by the <code>abusim-coordinator</code>, it serves as both a monitor and a controller for the simulation.</p>
+<p>It provides a way to add/remove agents/nodes, monitor their attributes and manage rules via rulesets.</p>
+<p>Execution of nodes can also then be started/stopped.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../abumon/" class="btn btn-neutral float-left" title="AbU Monitor"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../gorosetta/" class="btn btn-neutral float-right" title="goROSetta/goMavUtil">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../abumon/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../gorosetta/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

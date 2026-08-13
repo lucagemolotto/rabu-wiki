@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Robo-AbU - Robo-AbU Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Robo-AbU";
+        var mkdocs_page_input_path = "rabu.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Robo-AbU Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Robo-AbU</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#syntax">Syntax</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting started</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#example">Example</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#supported-vehicles">Supported vehicles</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#default-physical-attributes">Default Physical Attributes</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tools</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../tools/tools/">About</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tools/abumon/">AbU Monitor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tools/abusim/">AbU Simulator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tools/gorosetta/">goROSetta/goMavUtil</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../contributing/">Contributing</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Robo-AbU Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Robo-AbU</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="robo-abu-a-dsl-for-event-driven-robotic-systems">Robo-AbU: A DSL for Event-Driven Robotic Systems</h1>
+<p>Robo-AbU is a variant of <code>goAbU</code>, the original Golang implementation of the <a href="">AbU calculus</a>.
+It provides a way to program robots via Event-Condition-Actions (ECA) rules, building event-driven and reactive robotic systems.
+AbU also abstracts away inter-agent communication by using <em>remote tasks</em>, which are actions acting on <em>remote</em> nodes, even though the rules is triggered locally.</p>
+<h2 id="syntax">Syntax</h2>
+<p>AbU rules take the following structure:</p>
+<pre><code>rule &lt;RuleName&gt;
+on &lt;event&gt;
+for / forall &lt;boolean condition&gt;
+do &lt;assignments&gt;
+</code></pre>
+<p>meaning that rule <code>&lt;RuleName&gt;</code> is triggered by the change of value of attribute <code>&lt;event&gt;</code>.
+If we used the keyword <code>for</code> and the boolean condition holds locally, it will results in a series of assignments, to local attribute.
+If, instead, we used keyword <code>for all</code> the assignments will be done on all remote nodes that satisfy the boolean condition.
+We call task the couple made up of the condition and the assignments (actions).</p>
+<p>The method evaluation of the tasks depends on whether we are using <em>eager</em> or <em>lazy</em> evaluation, more details <a href="../contributing/#lazyevaluation">here</a>.</p>
+<h2 id="getting-started">Getting started</h2>
+<p>To start writing Robo-AbU code you need 5 things:
+* A <code>RoboAbuAgent</code>, the Transaction Manager, see <a href="../contributing/#agent">here</a> for which are available.
+* A <code>RosResource</code>, the I/O Manager, which might also need a related <code>Vehicle</code>, see <a href="../contributing/#rosresources">RosResources</a>
+* A slice of AbU rules, one rule per string
+* A <code>RosExecuter</code>, which takes as arguments the agent, the resource and the slice of rules. Additionally it takes the global namespace for communication (the default is <code>/aburos</code>) and the type of evaluation.</p>
+<p>Then all we need is calling <code>Exec</code> and/or <code>Input</code> on the <code>RosExecuter</code>.</p>
+<h2 id="example">Example</h2>
+<p>In this example we will spawn two Copters, <code>cop1</code> and <code>cop2</code> which will be controlled by AbU rules and coordinate with each other.
+We start by making the two</p>
+<pre><code>    cop1, err := vehicles.NewCopterGoROSetta(&quot;copter1&quot;, &quot;&quot;, nil, nil)
+    if err != nil {
+        //return fmt.Errorf(&quot;failed to create executer: %v&quot;, err)
+        fmt.Println(&quot;failed to create vehicle: %v&quot;, err)
+    }
+    mem := ros_resources.NewCopterResource(cop1)
+    mem.Text[&quot;foo&quot;] = &quot;aaa&quot;
+    mem.Bool[&quot;detection_alarm&quot;] = false
+    mem.Float[&quot;base_alt&quot;] = 0.0
+
+    cop2, err := vehicles.NewCopterGoROSetta(&quot;copter2&quot;, &quot;&quot;, nil, nil)
+    if err != nil {
+        //return fmt.Errorf(&quot;failed to create executer: %v&quot;, err)
+        fmt.Println(&quot;failed to create vehicle: %v&quot;, err)
+    }
+    mem_cop := ros_resources.NewCopterResource(cop2)
+    mem_cop.Text[&quot;foo&quot;] = &quot;aaa&quot;
+    mem_cop.Bool[&quot;detection_picker&quot;] = true
+    mem_cop.Float[&quot;detectionfound_lat&quot;] = 0.0
+    mem_cop.Float[&quot;detectionfound_lon&quot;] = 0.0
+    mem_cop.Bool[&quot;detectionfound&quot;] = false
+    mem_cop.Float[&quot;base_alt&quot;] = 0.0
+</code></pre>
+<p>We declared the vehicles, then the resource and add some attributes which will come in handy for the logic of our system.</p>
+<p>Now we declare the rules. InitRule is used as the starting trigger of our vehicles, putting them in <code>GUIDED</code> mode.
+Then we arm them via <code>armRule</code> and take off via <code>takeoffRule</code>.</p>
+<pre><code>    initRule := `rule InitRule on foo for &quot;abc&quot; == foo do set_mode = &quot;GUIDED&quot;`
+    armRule := `rule ModeRule on start for mode == &quot;GUIDED&quot; do set_arm = true`
+    takeoffRule := `rule TakeOff on arm for arm do take_off = 5.0`
+</code></pre>
+<p>Now comes the import part. <code>moveRule</code> waits for the vehicle to have taken off at a good enough altitude and moves by in a Front-Right-Down (FRD) frame by vector (-5m,0m,2m).
+If at any time, <code>cop1</code>'s built-in object detection sensor is triggered, it sends a message to all copter capable of picking the object (in our case, <code>cop2</code>). At this point, <code>cop2</code> will take off and reach the coordinates sent by <code>cop1</code>.</p>
+<pre><code>    moveRule := `rule MoveRule on altitude foo for &quot;GUIDED&quot; == mode &amp;&amp; altitude &gt; 3 &amp;&amp; foo == &quot;abb&quot; do move_x = -5.0, move_y = 0.0, move_z = 2.0, foo = &quot;qwe&quot;`
+    alarmRule := `rule AlarmRule on detection_sensor for true do detection_alarm = detection_sensor`
+    globalRule := `rule detectionRule on detection_alarm for all true == ext.detection_picker do ext.detectionfound = true, ext.detectionfound_lat = position_lat, ext.detectionfound_lon = position_lon`
+    copterRule1 := `rule detectionTakeOffRule on detectionfound for detectionfound do foo = &quot;bca&quot; `
+    copterRule2 := `rule GoTodetectionRule on detectionfound altitude for base_alt &gt; 0 &amp;&amp; altitude &gt; 3 &amp;&amp; detectionfound do setposition_lat = detectionfound_lat, setposition_lon = detectionfound_lon, setposition_alt = position_alt`
+</code></pre>
+<p>Finally, we make some rules for landing and putting the vehicles back in their default mode.</p>
+<pre><code>    landRule := `rule LandRule on foo for &quot;cba&quot; == foo do set_mode = &quot;LAND&quot;`
+    landRule2 := `rule LandRule2 on altitude for &quot;cba&quot; == foo &amp;&amp; altitude == 0 do mode = &quot;STABILIZE&quot;`
+</code></pre>
+<p>Now we make the transaction managers and the executers.</p>
+<pre><code>    cop1_agent, _ := NewRosAgent()
+    cop2_agent, _ := NewRosAgent()
+
+    executer, err := NewRosExecuter(mem, []string{initRule, armRule, takeoffRule, alarmRule, globalRule, landRule, landRule2, takeoffRule}, cop1_agent, &quot;copter1&quot;, &quot;/aburos&quot;, &quot;lazy&quot;)
+    if err != nil {
+        //return fmt.Errorf(&quot;failed to create executer: %v&quot;, err)
+        fmt.Printf(&quot;failed to create executer: %v\n&quot;, err)
+    }
+    fmt.Println(&quot;Created first executer&quot;)
+    executer2, err := NewRosExecuter(mem_cop, []string{initRule, localRule2, localRule3, takeoffRule, copterRule1, copterRule2, landRule, landRule2}, cop2_agent, &quot;copter2&quot;, &quot;/aburos&quot;, &quot;lazy&quot;)
+    if err != nil {
+        //return fmt.Errorf(&quot;failed to create executer: %v&quot;, err)
+        fmt.Printf(&quot;failed to create executer: %v\n&quot;, err)
+    }
+    fmt.Println(&quot;Created second executer&quot;)
+</code></pre>
+<p>Lastly, we loop the executor and use inputs for interacting with the system with timers.</p>
+<pre><code>    time.Sleep(1 * time.Second)
+    fmt.Println(&quot;Input start&quot;)
+    time.Sleep(2 * time.Second)
+    executer.Input(`foo = &quot;abc&quot;`)
+    executer.Input(`foo = &quot;bca&quot;`)
+    executer2.Input(`foo = &quot;abc&quot;`)
+    fmt.Println(&quot;Input done&quot;)
+
+    go func() {
+        for {
+            executer.Exec()
+        }
+    }()
+    go func() {
+        for {
+            executer2.Exec()
+        }
+    }()
+    time.Sleep(6 * time.Second)
+    executer.Input(`foo = &quot;abb&quot;`)
+    state4, _ := executer2.TakeState()
+    newalt := state4.Float[&quot;altitude&quot;]
+    fmt.Println(&quot;newalt&quot;, newalt)
+    time.Sleep(30 * time.Second)
+    executer.Input(`foo = &quot;cba&quot;`)
+    executer2.Input(`foo = &quot;cba&quot;`)
+    time.Sleep(60 * time.Second)
+</code></pre>
+<h2 id="supported-vehicles">Supported vehicles</h2>
+<ul>
+<li>ArduCopter</li>
+<li>ArduPlane (WIP)</li>
+<li>ArduRover</li>
+<li>ArduSub</li>
+</ul>
+<h2 id="default-physical-attributes">Default Physical Attributes</h2>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Components</th>
+<th>Type</th>
+<th>Example Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mode</td>
+<td>-</td>
+<td>Input - Text</td>
+<td>"GUIDED"</td>
+<td>Current Autopilot mode of the vehicle</td>
+</tr>
+<tr>
+<td>set_mode</td>
+<td>-</td>
+<td>Output - Text</td>
+<td>"GUIDED"</td>
+<td>Sends to the autopilot the desidered mode</td>
+</tr>
+<tr>
+<td>arm</td>
+<td>-</td>
+<td>Input - Bool</td>
+<td>false</td>
+<td>Current arming state of the vehicle's motors</td>
+</tr>
+<tr>
+<td>set_arm</td>
+<td>-</td>
+<td>Output - Bool</td>
+<td>true</td>
+<td>Sets the arming state of the vehicle's motors</td>
+</tr>
+<tr>
+<td>altitude</td>
+<td>-</td>
+<td>Input - Float</td>
+<td>5.0</td>
+<td>Altitude of the vehicle relative to the ground (Copter/Plane only)</td>
+</tr>
+<tr>
+<td>take_off</td>
+<td>-</td>
+<td>Output - Float</td>
+<td>5.0</td>
+<td>Altitude of the vehicle relative to the ground (Copter only)</td>
+</tr>
+<tr>
+<td>depth</td>
+<td>-</td>
+<td>Input - Float</td>
+<td>3.2</td>
+<td>Depth of the vehicle relative to the water surface (Sub only)</td>
+</tr>
+<tr>
+<td>move</td>
+<td>move_x, move_y, move_z</td>
+<td>Output - Float</td>
+<td>(3.0, -1.1, 2.4)</td>
+<td>Forward-Right-Down (vehicle-centric) movement of the vehicle in meters</td>
+</tr>
+<tr>
+<td>position</td>
+<td>position_lat, position_lon, position_alt</td>
+<td>Input - Integer, Integer, Float</td>
+<td></td>
+<td>Current GNSS coordinates of the vehicle. Latitude and longitude are specificied in WGS84 and multiplied by 10e7. Altitude is meters above average sea level (ASL).</td>
+</tr>
+<tr>
+<td>set_position</td>
+<td>setposition_lat, setposition_lon, setposition_alt</td>
+<td>Input - Integer, Integer, Float</td>
+<td></td>
+<td>Sends to the autopilot the desidered GNSS coordinates of the vehicle. Latitude and longitude are specificied in WGS84 and multiplied by 10e7. Altitude is meters above average sea level (ASL).</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../tools/tools/" class="btn btn-neutral float-right" title="About">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+      <span><a href="../tools/tools/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>AbU Monitor - Robo-AbU Docs</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "AbU Monitor";
+        var mkdocs_page_input_path = "tools/abumon.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Robo-AbU Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../rabu/">Robo-AbU</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tools</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../tools/">About</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">AbU Monitor</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#node-configurations">Node configurations</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#rule-configuration">Rule configuration</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../abusim/">AbU Simulator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../gorosetta/">goROSetta/goMavUtil</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../contributing/">Contributing</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Robo-AbU Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Tools</li>
+      <li class="breadcrumb-item active">AbU Monitor</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="abu-monitor">AbU Monitor</h2>
+<p>The AbU Monitor <code>(abumon)</code> is the tool for deploying and monitoring AbU nodes on single devices.
+It's packaged as Docker Compose container, available <a href="https://">here</a> and a <a href="https://github.com/Autonomous-Systems-Laboratory-UNIUD/abumon-goabu-agent">GitHub repository</a>.
+It can be configured from the <code>abu-config</code> folder, which also provides some examples.</p>
+<p>To start up the tool, it is sufficient to use <code>docker compose up</code> while inside the directory containing <code>docker-compose.yaml</code>.</p>
+<h3 id="node-configurations">Node configurations</h3>
+<p>The AbU node can be configured from <code>abu-config.yaml</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Example Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>"sub1"</td>
+<td>Unique identifier for the agent or component instance.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>"sub"</td>
+<td>Defines the type or role of the agent.</td>
+</tr>
+<tr>
+<td>tick_rate</td>
+<td>integer</td>
+<td>50</td>
+<td>Execution/update frequency of the agent, expressed in milliseconds.</td>
+</tr>
+<tr>
+<td>rules</td>
+<td>string (path)</td>
+<td>"/path/to/rules.yaml"</td>
+<td>Path to the YAML file containing the agent's configurable behavior rules.</td>
+</tr>
+<tr>
+<td>memory</td>
+<td>object</td>
+<td>—</td>
+<td>Defines the agent's internal memory variables. Memory is organized by data type.</td>
+</tr>
+<tr>
+<td>memory.Text</td>
+<td>object</td>
+<td>—</td>
+<td>Collection of text/string variables. Each entry name is a variable identifier, and its value is a string.</td>
+</tr>
+<tr>
+<td>memory.Text.<variable_name></td>
+<td>string</td>
+<td>val: "example"</td>
+<td>A configurable text variable stored in memory.</td>
+</tr>
+<tr>
+<td>memory.Bool</td>
+<td>object</td>
+<td>—</td>
+<td>Collection of boolean variables. Each entry name is a variable identifier, and its value is either true or false.</td>
+</tr>
+<tr>
+<td>memory.Bool.<variable_name></td>
+<td>boolean</td>
+<td>val: true</td>
+<td>A configurable boolean variable stored in memory.</td>
+</tr>
+<tr>
+<td>memory.Integer</td>
+<td>object</td>
+<td>—</td>
+<td>Collection of integer variables. Each entry name is a variable identifier, and its value is an integer number.</td>
+</tr>
+<tr>
+<td>memory.Integer.<variable_name></td>
+<td>integer</td>
+<td>val: 10</td>
+<td>A configurable integer variable stored in memory.</td>
+</tr>
+<tr>
+<td>memory.Float</td>
+<td>object</td>
+<td>—</td>
+<td>Collection of floating-point variables. Each entry name is a variable identifier, and its value is a decimal number.</td>
+</tr>
+<tr>
+<td>memory.Float.<variable_name></td>
+<td>float</td>
+<td>val: 3.14</td>
+<td>A configurable floating-point variable stored in memory.</td>
+</tr>
+<tr>
+<td>autopilot</td>
+<td>object</td>
+<td>—</td>
+<td>Configuration parameters for communication with the autopilot system.</td>
+</tr>
+<tr>
+<td>autopilot.ip</td>
+<td>string</td>
+<td>"0.0.0.0"</td>
+<td>IP address used for the autopilot communication interface.</td>
+</tr>
+<tr>
+<td>autopilot.port</td>
+<td>integer</td>
+<td>14551</td>
+<td>Network port used for autopilot communication.</td>
+</tr>
+<tr>
+<td>autopilot.id</td>
+<td>integer</td>
+<td>1</td>
+<td>Identifier of the autopilot system or vehicle within the communication protocol.</td>
+</tr>
+</tbody>
+</table>
+<p>Here's an example for a configuration of an <code>argoCopter</code> called <code>cop1</code> which does an <code>Exec</code> every 50ms and has a <code>Text</code> attribute <code>foo</code> with value <code>"a"</code>.</p>
+<pre><code>id: &quot;cop1&quot;
+type: &quot;argoCopter&quot;
+tick_rate: 50
+rules: &quot;/home/aislab/agent/abumon-goabu-agent/abu-config/rules.yaml&quot;
+memory:
+  Text:
+    id: &quot;cop1&quot;
+    foo: &quot;a&quot;
+
+autopilot:                  
+  ip: &quot;0.0.0.0&quot;
+  port: 14551           
+  id: 1
+</code></pre>
+<h3 id="rule-configuration">Rule configuration</h3>
+<p>The set of rules used by the vehicle is indicated in the node configuration.
+The YAML file containing the rules should have the following structure:</p>
+<pre><code>rules:
+  rule:
+    name: &lt;string&gt;             # required (identifier for the rule)
+    event: &lt;string&gt;            # required (the event that triggers the rule, e.g. &quot;init&quot;, &quot;mode&quot;, &quot;altitude&quot;, etc.)
+    condtype: &lt;integer&gt;        # required (the type of condition, 0 for local task, 1 for remote task)
+    condition: &lt;string&gt;        # required (the condition to evaluate when the event occurs, e.g. &quot;mode == \&quot;GUIDED\&quot;&quot;, &quot;altitude &gt; 10&quot;, etc.)
+    action: &lt;string&gt;           # required (the action to execute if the condition is true, e.g. &quot;set_mode = \&quot;GUIDED\&quot;&quot;, &quot;set_arm = true&quot;, etc.)
+  rule:
+    name: &lt;string&gt;
+    event: &lt;string&gt;
+    condtype: &lt;integer&gt;
+    condition: &lt;string&gt;
+    action: &lt;string&gt;
+</code></pre>
+<p>This is an example of a set of rules to start a copter and make it off to 8 meters</p>
+<pre><code>rules:
+  rule:
+        &quot;name&quot;: &quot;InitRule&quot;,
+        &quot;event&quot;: &quot;foo&quot;,
+        &quot;condtype&quot;: 0,
+        &quot;condition&quot;: &quot;\&quot;abc\&quot; == foo&quot;,
+        &quot;action&quot;: &quot;init = true&quot;
+  rule:
+        &quot;name&quot;: &quot;ModeRule&quot;,
+        &quot;event&quot;: &quot;init&quot;,
+        &quot;condtype&quot;: 0,
+        &quot;condition&quot;: &quot;true == init&quot;,
+        &quot;action&quot;: &quot;set_mode = \&quot;GUIDED\&quot;&quot;
+  rule:
+        &quot;name&quot;: &quot;ArmRule&quot;,
+        &quot;event&quot;: &quot;mode&quot;,
+        &quot;condtype&quot;: 0,
+        &quot;condition&quot;: &quot;mode == \&quot;GUIDED\&quot;&quot;,
+        &quot;action&quot;: &quot;set_arm = true&quot;
+  rule:
+        &quot;name&quot;: &quot;TakeOffRule&quot;,
+        &quot;event&quot;: &quot;arm&quot;,
+        &quot;condtype&quot;: 0,
+        &quot;condition&quot;: &quot;arm == true&quot;,
+        &quot;action&quot;: &quot;take_off = 8.0&quot;
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../tools/" class="btn btn-neutral float-left" title="About"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../abusim/" class="btn btn-neutral float-right" title="AbU Simulator">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../tools/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../abusim/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

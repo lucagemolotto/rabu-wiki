@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Contributing - Robo-AbU Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Contributing";
+        var mkdocs_page_input_path = "contributing.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Robo-AbU Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../rabu/">Robo-AbU</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tools</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../tools/tools/">About</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tools/abumon/">AbU Monitor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tools/abusim/">AbU Simulator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tools/gorosetta/">goROSetta/goMavUtil</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Contributing</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#agent">agent</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#eagerevaluation">eagerevaluation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#lazyevaluation">lazyevaluation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#lockcoordinator">lockCoordinator</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#logger">logger</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#parser">parser</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rosresources">rosresources</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#update">update</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#utilities">utilities</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#vehicles">vehicles</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#wiretask">wireTask</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#executer">Executer</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#adding-new-vehicles">Adding new vehicles</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Robo-AbU Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Development</li>
+      <li class="breadcrumb-item active">Contributing</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="contributing">Contributing</h1>
+<p>The repository for Robo-Abu can be found <a href="">here</a>.
+It is divided different logical modules</p>
+<h2 id="setup">Setup</h2>
+<p>Robo-AbU depends on TII-UAE's <a href="https://github.com/tiiuae/rclgo">rclgo</a>, as such it currently support only ROS2 Humble.</p>
+<p>Once ROS2 Humble is setup, install the custom ROS2 messages for Robo-AbU and goROSetta.</p>
+<pre><code># build the messages
+cd /PATH_TO_ROBOABU/aburos_msgs/ &amp;&amp; source /opt/ros/humble/setup.bash &amp;&amp; colcon build
+# put the source command in the shell startup, bash is given as an example, use .zshrc if you use zsh
+echo 'source /PATH_TO_ROBOABU/aburos_msgs/install/setup.bash' &gt;&gt; ~/.bashrc 
+
+# do the same for gorosetta
+cd /PATH_TO_GOROSETTA/goROSetta_msgs/ &amp;&amp; source /opt/ros/humble/setup.bash &amp;&amp; colcon build
+echo 'source /PATH_TO_GOROSETTA/goROSetta_msgs/install/setup.bash' &gt;&gt; ~/.bashrc
+</code></pre>
+<p>And generate the CGO bindings for the messages</p>
+<pre><code>source /opt/ros/humble/setup.bash &amp;&amp; source /home/aislab/aburos/aburos_msgs/install/setup.bash &amp;&amp; source /home/aislab/goROSetta/goROSetta_msgs/install/setup.bash &amp;&amp; go run github.com/tiiuae/rclgo/cmd/rclgo-gen generate -d /PATH_TO_ROBOABU/msgs --message-module-prefix &quot;github.com/Autonomous-Systems-Laboratory-UNIUD/aburos/msgs&quot;
+
+## only needed if developing for goROSetta too
+source /opt/ros/humble/setup.bash &amp;&amp; source /home/aislab/goROSetta/goROSetta_msgs/install/setup.bash &amp;&amp; go run github.com/tiiuae/rclgo/cmd/rclgo-gen generate -d /PATH_TO_GOROSETTA/ROSetta/msgs --message-module-prefix &quot;github.com/Autonomous-Systems-Laboratory-UNIUD/goROSetta/ROSetta/msgs&quot;
+</code></pre>
+<p>Alternatively, one can use the provided devcontainer available <a href="https://github.com/Autonomous-Systems-Laboratory-UNIUD/AbU-ROS-devcontainer">here</a> and attach to it via Visual Studio Code.</p>
+<h2 id="modules">Modules</h2>
+<h3 id="agent">agent</h3>
+<p>Implementations of different agents for the transaction mananager. They should all be implementations of the <code>RoboAbuAgent</code> interface.
+Currently, we provide the following agents:</p>
+<ul>
+<li><code>rosAgent</code> - ROS2-based agent, using the topic <code>/aburos/aburos/global</code> for communication. Implements the Decentralized 2PC Protocol from <a href="https://link.springer.com/chapter/10.1007/978-3-031-95497-9_6">Comini et al.</a></li>
+<li><code>zenohAgent</code> - Zenoh-native agent, currently WIP.</li>
+<li><code>abCast</code> - Implementation of the ISIS-ABCast protocol for atomic broadcast/total ordering.</li>
+<li><code>seqAgent</code> - Simple centralized sequencer, nodes are clients using the service <code>/aburos/request_sequence</code> to request a sequence number and publish transaction with the number attached. Needs a ROS2 server implementing the sequencer, a docker image is available with <code>docker pull lucagemolotto/abumon-sequencer</code>.</li>
+</ul>
+<h3 id="eagerevaluation">eagerevaluation</h3>
+<p>Implementation of the classical eager evaluation of updates seen in the original AbU papers.</p>
+<h3 id="lazyevaluation">lazyevaluation</h3>
+<p>Implementation of the new <em>lazy</em> evaluation featured in Robo-AbU.
+In this, updates take the form of the whole task (condition + actions) and are evaluated only when taken from the pool.</p>
+<h3 id="lockcoordinator">lockCoordinator</h3>
+<p>Lock strategy of Robo-AbU, mostly taken from the original <a href="https://github.com/abu-lang/goabu">goAbU</a>.</p>
+<h3 id="logger">logger</h3>
+<p>The shared logger used by the different modules in Robo-AbU, writes to the directory define in <code>logger.config</code>.</p>
+<h3 id="parser">parser</h3>
+<p>Rule parser based on GRule engine, mostly taken from <a href="https://github.com/abu-lang/goabu">goAbU</a>.</p>
+<h3 id="rosresources">rosresources</h3>
+<p>This module contains the implementations of the I/O Managers of all the vehicles supported by Robo-AbU.
+The I/O Manager is the gateway to the vehicle, it handles inputs from its sensors, via the <code>gatherInputs</code> function and the ouput to its actuators, using <code>SendCommands</code>.</p>
+<p>All implementations <strong>must</strong> ad-here to the <code>RosResources</code> interface.
+See <a href="./#adding-new-vehicles">adding new vehicles</a> for more information.</p>
+<h3 id="update">update</h3>
+<p>Interface for Robo-AbU updates, implementations should be their own module, as done by <code>eagerevaluation</code> and <code>lazyevaluation</code>.</p>
+<h3 id="utilities">utilities</h3>
+<p>Generic utilities for other modules.</p>
+<h3 id="vehicles">vehicles</h3>
+<p>This module contains the Golang APIs for vehicles that are interface via messages, for example ROS2 or MAVLink.
+Currently, we provide APIs for ArduPilot-based vehicles via goROSetta.
+Vehicles for existing <code>RosResources</code> should ad-here to the interfaces in <code>rosVehicle.go</code>.</p>
+<h3 id="wiretask">wireTask</h3>
+<p>Utilities for sending and receiving <code>RemoteTasks</code> via transactions.</p>
+<h3 id="executer">Executer</h3>
+<p><code>abuRosExecuter.go</code> and <code>abuRosGoRoutine.go</code> provide core of the Robo-AbU implemenations. Together, they make up the <code>Executer</code> module and implement the <code>Exec</code>, <code>Exec-F</code>, <code>Disc</code> and <code>Input</code> rules.</p>
+<h2 id="adding-new-vehicles">Adding new vehicles</h2>
+<p>Support of a type of vehicle comes in the form of an implementation of the <code>RosResources</code> interface.
+Optionally, specific vehicle Golang APIs can be implemented as part the <code>vehicles</code> module, this is the expected practice when the vehicle only has message-based APIs (for example via MAVLink or ROS2).
+For example, support for VTOLs should first come in the form of a new <code>RosResources</code> implementation, while support for PX4 quadcopters should be a <code>vehicles.Copter</code> used by the already existing <code>CopterResource</code>. </p>
+<p>The attributes related to commands, sensors and actuators must be provided in the form a string slice and assigned to the field <code>rosKeywords</code>.
+When initializing the vehicle resources, a default value for all these attributes should be set, see <code>CopterRosResource.go</code> for an example.
+Additionally, vehicles can be easily extended by simply wrapping other implementations, see for example <code>argoCopterResource.go</code> which extends <code>CopterResource</code></p>
+<p>The <code>Modified</code> functions is used to tell the I/O manager which attributes are being modified by an <code>Exec</code>, the <code>SendCommands</code> function is then called at the end of the <code>Exec</code> to send all the gathered outputs. This is particularly useful for commands that are made up by multiple attributes, for example <code>move</code> which has the components <code>x</code>, <code>y</code> and <code>z</code>, as we can wait to see which of them are being used and then send out a single command with all three.
+<code>ResetCommands</code> is used after the <code>SendCommands</code> and simply resets the modification flags done by <code>Modified</code>.</p>
+<p>Implementations of new vehicles of existing <code>RosResources</code> must ad-here to the interfaces found in <code>vehicles/rosVehicle.go</code>.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../tools/gorosetta/" class="btn btn-neutral float-left" title="goROSetta/goMavUtil"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../tools/gorosetta/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
