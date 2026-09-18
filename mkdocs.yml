@@ -1,11 +1,37 @@
 site_name: Robo-AbU Docs
+site_description: Documentation for Robo-AbU, an ECA-rule DSL and runtime for distributed, event-driven robotic systems.
+repo_url: https://github.com/Autonomous-Systems-Laboratory-UNIUD/AbU-ROS
 nav:
+  - Home: index.md
   - Robo-AbU: rabu.md
-  - Tools: 
+  - Tools:
     - About: tools/tools.md
     - AbU Monitor: tools/abumon.md
     - AbU Simulator: tools/abusim.md
     - goROSetta/goMavUtil: tools/gorosetta.md
-  - Development: 
+  - Development:
     - Contributing: contributing.md
-theme: readthedocs
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - content.code.copy
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
