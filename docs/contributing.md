@@ -64,11 +64,7 @@ ABU_LOG_LEVEL=info
 | --- | --- |
 | `ABU_LOGS_DIR` | Directory the per-node log files are written to, as `app_<id>_<RFC3339>.log` |
 | `ABU_LOG_ENV` | `dev` adds human-readable console output on top of the file |
-| `ABU_LOGLEVEL` | zerolog level: `trace`, `debug`, `info`, `warn`, `error` |
-
-!!! warning "Level key mismatch"
-    The shipped `logger.config` sets `ABU_LOG_LEVEL`, but `logger.go` reads `ABU_LOGLEVEL`. As
-    shipped the level always falls back to the default. Set both until this is reconciled.
+| `ABU_LOG_LEVEL` | zerolog level: `trace`, `debug`, `info`, `warn`, `error`. An unrecognised value falls back to the default |
 
 ## Modules
 

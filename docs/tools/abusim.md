@@ -161,11 +161,6 @@ and forwards to the node's `Input`:
 
 Values may be strings, numbers or booleans; anything else is rejected.
 
-!!! bug "`stop/:id` starts the node"
-    `api.StopNode` calls `c.StartNodeExecution(id)` rather than `StopNodeExecution`, so stopping a
-    single node currently starts it. Stopping the whole simulation with `GET /api/sim/stop` is
-    unaffected.
-
 ## UI
 
 The UI is served by the `abusim-coordinator` itself, as static files, at
@@ -174,34 +169,4 @@ The UI is served by the `abusim-coordinator` itself, as static files, at
 It provides a way to add and remove nodes, monitor their attributes live, and manage rules via
 rulesets. Execution of nodes can then be started and stopped, individually or all at once.
 
-The UI is a thin client over the API above: everything it does can be scripted, which is what the
-[environment harness](#environment-harness) does.
-
-## Environment harness
-
-`abusim-environment/` holds a small Python harness for scripting the *world* around the simulation —
-the part that is not a robot. You register callbacks on a node's attribute and respond by posting
-inputs back into other nodes.
-
-```python
-from environment import Environment
-
-env = Environment()
-
-def change_temp(action, variables):
-    room_temp = env.get_variables('temp_S1')['temperature']
-    if action == 'increase':
-        env.post_input('temp_S1', f'temperature = {room_temp + 1}')
-
-env.on('conv_S1', 'action', 10, change_temp)   # node, attribute, poll period
-env.loop()
-```
-
-This is how you close the loop on non-physical scenarios — thermostats, doors, alarms — without
-writing a vehicle resource for them.
-
-!!! warning "The harness targets an older API"
-    `environment.py` calls `GET/POST http://localhost:4000/memory/<agent>`, which the current
-    coordinator does not route. Point `get_variables` at `/api/nodes/memory/<agent>` and
-    `post_input` at `/api/sim/input/<agent>` (with the `[[name, value], …]` body documented above)
-    before using it.
+The UI is a thin client over the API above, so anything it can do can equally be scripted.

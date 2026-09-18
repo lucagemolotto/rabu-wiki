@@ -58,15 +58,15 @@ The AbU node is configured from a single YAML file, conventionally `abu-config/c
 | `autopilot.port` | integer | `14551` | MAVLink port |
 | `autopilot.id` | integer | `1` | MAVLink system ID of the vehicle, 1–255 |
 
-!!! warning "The shipped examples use stale key names"
-    `abu-config/config.yaml` and `config_template.yaml` still use `tick_rate` and `autopilot.ip`,
-    but [`types.AgentConfiguration`](https://github.com/Autonomous-Systems-Laboratory-UNIUD/abumon-goabu-agent/blob/main/types/types.go)
-    declares `yaml:"tick"` and `yaml:"addr"`. Unknown keys are silently dropped, so a config using
-    the old names boots with a tick of `0` (a busy `Exec` loop) and an empty autopilot address.
-    Use `tick` and `addr`.
+!!! warning "`tick` must carry a unit"
+    `Tick` is a Go `time.Duration`, so it has to be written with a unit — `50ms`, `1s`. A bare
+    integer is **not** accepted: `tick: 50` fails to unmarshal with
+    *cannot unmarshal !!int `50` into time.Duration*, and the agent exits reporting it.
 
-    `tick` is a Go `time.Duration`, so write it as a string with a unit — `50ms`, `1s`. A bare
-    integer is read as **nanoseconds**.
+!!! note "Copy from `config.yaml` or `config_template.yaml`"
+    The older `config_example.yaml` and `config_old.yaml` still say `tick_rate` and `autopilot.ip`.
+    Unknown keys are dropped **silently**, so a config following those starts with a tick of `0` — a
+    busy `Exec` loop — and an empty autopilot address.
 
 `memory.Text.id` is not optional for vehicle types: it is what the agent passes as the vehicle
 identifier when constructing the goROSetta node. Set it to the same value as the top-level `id`.
@@ -111,11 +111,6 @@ Each entry is assembled into the rule string
 `rule <name> on <event> for|for all <condition> do <action>`, so anything valid in the
 [Robo-AbU syntax](../rabu.md#syntax) is valid here. Remember to escape the double quotes around
 string literals.
-
-!!! warning "`rules_template.yaml` does not match the parser"
-    The shipped `rules_template.yaml` shows a nested `rules:` → `rule:` structure. The agent's
-    `loadRules` unmarshals the file into a `[]RuleConfig`, so it must be a top-level list, as in
-    `rules.yaml` and the other shipped rulesets. A nested file parses to zero rules.
 
 ### Example
 
