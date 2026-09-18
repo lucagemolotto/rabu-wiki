@@ -1,0 +1,1388 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for Robo-AbU, an ECA-rule DSL and runtime for distributed, event-driven robotic systems.">
+      
+      
+      
+      
+        <link rel="prev" href="../tools/gorosetta/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Contributing - Robo-AbU Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#contributing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Robo-AbU Docs" class="md-header__button md-logo" aria-label="Robo-AbU Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robo-AbU Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Contributing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Autonomous-Systems-Laboratory-UNIUD/AbU-ROS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Robo-AbU Docs" class="md-nav__button md-logo" aria-label="Robo-AbU Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Robo-AbU Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Autonomous-Systems-Laboratory-UNIUD/AbU-ROS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rabu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robo-AbU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/abumon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AbU Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/abusim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AbU Simulator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/gorosetta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    goROSetta/goMavUtil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        agent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eagerevaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        eagerevaluation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lazyevaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        lazyevaluation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lockcoordinator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        lockCoordinator
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logger" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        logger
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        parser
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rosresources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rosresources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        update
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        utilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vehicles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vehicles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wiretask" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wireTask
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#executer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Executer
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-new-vehicles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding new vehicles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adding new vehicles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-command-cycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The command cycle
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-a-new-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding a new agent
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        agent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eagerevaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        eagerevaluation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lazyevaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        lazyevaluation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lockcoordinator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        lockCoordinator
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logger" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        logger
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        parser
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rosresources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rosresources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        update
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        utilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vehicles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vehicles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wiretask" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wireTask
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#executer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Executer
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-new-vehicles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding new vehicles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adding new vehicles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-command-cycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The command cycle
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-a-new-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding a new agent
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="contributing">Contributing<a class="headerlink" href="#contributing" title="Permanent link">&para;</a></h1>
+<p>The repository for Robo-AbU is
+<a href="https://github.com/Autonomous-Systems-Laboratory-UNIUD/AbU-ROS">AbU-ROS</a> (Go module
+<code>github.com/Autonomous-Systems-Laboratory-UNIUD/aburos</code>). It is divided into different logical
+modules, described <a href="#modules">below</a>.</p>
+<h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h2>
+<p>Robo-AbU depends on TII-UAE's <a href="https://github.com/tiiuae/rclgo">rclgo</a>, and so currently supports
+only <strong>ROS 2 Humble</strong>. Go ≥ 1.24 is required.</p>
+<p>Once ROS 2 Humble is set up, install the custom ROS 2 messages for Robo-AbU and goROSetta.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># build the messages</span>
+<span class="nb">cd</span><span class="w"> </span>/PATH_TO_ROBOABU/aburos_msgs/<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>/opt/ros/humble/setup.bash<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>colcon<span class="w"> </span>build
+<span class="c1"># put the source command in the shell startup; bash is given as an example, use .zshrc if you use zsh</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">'source /PATH_TO_ROBOABU/aburos_msgs/install/setup.bash'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+
+<span class="c1"># do the same for goROSetta</span>
+<span class="nb">cd</span><span class="w"> </span>/PATH_TO_GOROSETTA/goROSetta_msgs/<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>/opt/ros/humble/setup.bash<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>colcon<span class="w"> </span>build
+<span class="nb">echo</span><span class="w"> </span><span class="s1">'source /PATH_TO_GOROSETTA/goROSetta_msgs/install/setup.bash'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+</code></pre></div>
+<p>And generate the CGO bindings for the messages:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">source</span><span class="w"> </span>/opt/ros/humble/setup.bash<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>/PATH_TO_ROBOABU/aburos_msgs/install/setup.bash<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>/PATH_TO_GOROSETTA/goROSetta_msgs/install/setup.bash<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>go<span class="w"> </span>run<span class="w"> </span>github.com/tiiuae/rclgo/cmd/rclgo-gen<span class="w"> </span>generate<span class="w"> </span>-d<span class="w"> </span>/PATH_TO_ROBOABU/msgs<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>--message-module-prefix<span class="w"> </span><span class="s2">"github.com/Autonomous-Systems-Laboratory-UNIUD/aburos/msgs"</span>
+
+<span class="c1">## only needed if developing for goROSetta too</span>
+<span class="nb">source</span><span class="w"> </span>/opt/ros/humble/setup.bash<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>/PATH_TO_GOROSETTA/goROSetta_msgs/install/setup.bash<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>go<span class="w"> </span>run<span class="w"> </span>github.com/tiiuae/rclgo/cmd/rclgo-gen<span class="w"> </span>generate<span class="w"> </span>-d<span class="w"> </span>/PATH_TO_GOROSETTA/ROSetta/msgs<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>--message-module-prefix<span class="w"> </span><span class="s2">"github.com/Autonomous-Systems-Laboratory-UNIUD/goROSetta/ROSetta/msgs"</span>
+</code></pre></div>
+<p>The bindings are generated from the <em>installed</em> message packages, so both <code>install/setup.bash</code>
+scripts must be sourced in the same shell that runs <code>rclgo-gen</code>, and re-run it after any <code>.msg</code> or
+<code>.srv</code> change.</p>
+<p>Alternatively, one can use the provided devcontainer available
+<a href="https://github.com/Autonomous-Systems-Laboratory-UNIUD/AbU-ROS-devcontainer">here</a> and attach to it
+via Visual Studio Code. Architecture-specific containers also exist for
+<a href="https://github.com/Autonomous-Systems-Laboratory-UNIUD/abu-ros-container-aarch64">aarch64</a> and
+<a href="https://github.com/Autonomous-Systems-Laboratory-UNIUD/abu-ros-container-aarch32">aarch32</a> targets.</p>
+<h3 id="logging">Logging<a class="headerlink" href="#logging" title="Permanent link">&para;</a></h3>
+<p>The shared logger reads its settings from a config file whose path is <strong>hard-coded</strong> to
+<code>/home/aislab/aburos/logger/logger.config</code>, and panics if it is missing. It has the form:</p>
+<div class="highlight"><pre><span></span><code>ABU_LOGS_DIR=/home/aislab/aburos/logger
+ABU_LOG_ENV=dev
+ABU_LOG_LEVEL=info
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ABU_LOGS_DIR</code></td>
+<td>Directory the per-node log files are written to, as <code>app_&lt;id&gt;_&lt;RFC3339&gt;.log</code></td>
+</tr>
+<tr>
+<td><code>ABU_LOG_ENV</code></td>
+<td><code>dev</code> adds human-readable console output on top of the file</td>
+</tr>
+<tr>
+<td><code>ABU_LOG_LEVEL</code></td>
+<td>zerolog level: <code>trace</code>, <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>. An unrecognised value falls back to the default</td>
+</tr>
+</tbody>
+</table>
+<h2 id="modules">Modules<a class="headerlink" href="#modules" title="Permanent link">&para;</a></h2>
+<h3 id="agent">agent<a class="headerlink" href="#agent" title="Permanent link">&para;</a></h3>
+<p>Implementations of different agents for the transaction manager. They should all implement the
+<code>RoboAbuAgent</code> interface:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">RoboAbuAgent</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Init</span><span class="p">(</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w">            </span><span class="c1">// Initializes the communication service</span>
+<span class="w">    </span><span class="nx">Start</span><span class="p">()</span><span class="w">                               </span><span class="c1">// Starts the communication service routine</span>
+<span class="w">    </span><span class="nx">Stop</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w">                          </span><span class="c1">// Stops the communication service</span>
+<span class="w">    </span><span class="nx">ForAll</span><span class="p">([]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w">                  </span><span class="c1">// Broadcasts a payload/task via attribute-based communication</span>
+<span class="w">    </span><span class="nx">GetWirePool</span><span class="p">()</span><span class="w"> </span><span class="kt">chan</span><span class="w"> </span><span class="nx">wireTask</span><span class="p">.</span><span class="nx">WireTasks</span><span class="w"> </span><span class="c1">// Returns the WirePool of the agent</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>An agent is the only thing that knows how a remote task physically travels. It receives serialized
+<a href="#wiretask">wireTasks</a>, delivers them into the executer's wire pool, and guarantees whatever
+ordering its protocol provides. Swapping agents changes the fleet's consistency and failure
+characteristics without touching a single rule.</p>
+<p>Currently, we provide the following agents:</p>
+<table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>Constructor</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>rosAgent</code></td>
+<td><code>NewRosAgent()</code></td>
+<td>ROS 2-based agent, using the topic <code>/aburos/aburos/global</code> for communication. Implements the decentralized 2PC protocol from <a href="https://link.springer.com/chapter/10.1007/978-3-031-95497-9_6">Comini et al.</a></td>
+</tr>
+<tr>
+<td><code>rosAgentNgbr</code></td>
+<td><code>NewRosAgentNgbr()</code></td>
+<td>Neighbourhood-scoped variant of <code>rosAgent</code></td>
+</tr>
+<tr>
+<td><code>abCast</code></td>
+<td><code>NewABCastAgent()</code></td>
+<td>Implementation of the ISIS-ABCast protocol for atomic broadcast / total ordering</td>
+</tr>
+<tr>
+<td><code>seqAgent</code></td>
+<td><code>NewSeqAgent()</code></td>
+<td>Simple centralized sequencer. Nodes are clients that request a sequence number from the service <code>/aburos/request_sequence</code> and publish transactions with the number attached. Needs a ROS 2 server implementing the sequencer — <code>docker pull lucagemolotto/abumon-sequencer</code>, or <code>NewSequencer()</code> to run one in-process</td>
+</tr>
+<tr>
+<td><code>zenohAgent</code></td>
+<td>—</td>
+<td>Zenoh-native agent, currently WIP (the file is an empty stub)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="eagerevaluation">eagerevaluation<a class="headerlink" href="#eagerevaluation" title="Permanent link">&para;</a></h3>
+<p>Implementation of the classical eager evaluation of updates seen in the original AbU papers. An
+update carries the already-computed assignments: the condition is evaluated when the task is
+<em>received</em>, and what enters the pool is a concrete set of writes.</p>
+<p>Selected by passing <code>"eager"</code> as the <code>eval</code> argument of <code>NewRosExecuter</code>.</p>
+<h3 id="lazyevaluation">lazyevaluation<a class="headerlink" href="#lazyevaluation" title="Permanent link">&para;</a></h3>
+<p>Implementation of the new <em>lazy</em> evaluation featured in Robo-AbU. Here updates take the form of the
+whole task (condition + actions), and are evaluated only when taken from the pool.</p>
+<p>Because a robot's state changes continuously — altitude, position, mode — a condition that held when
+a task was sent may well be false by the time the task is applied. Deferring evaluation to the
+moment of application is what keeps rules meaningful on a moving vehicle.</p>
+<p>Selected by passing <code>"lazy"</code> as the <code>eval</code> argument of <code>NewRosExecuter</code>. Both <code>abumon</code> and <code>abusim</code>
+use lazy evaluation.</p>
+<h3 id="lockcoordinator">lockCoordinator<a class="headerlink" href="#lockcoordinator" title="Permanent link">&para;</a></h3>
+<p>Lock strategy of Robo-AbU, mostly taken from the original
+<a href="https://github.com/abu-lang/goabu">goAbU</a>. <code>coordinator.go</code> guards the node's memory across
+concurrent <code>Exec</code> and <code>Input</code>; <code>execCoordinator.go</code> sequences the phases of a single <code>Exec</code>.</p>
+<h3 id="logger">logger<a class="headerlink" href="#logger" title="Permanent link">&para;</a></h3>
+<p>The shared logger used by the different modules in Robo-AbU. Writes to the directory defined in
+<code>logger.config</code> — see <a href="#logging">Logging</a>.</p>
+<h3 id="parser">parser<a class="headerlink" href="#parser" title="Permanent link">&para;</a></h3>
+<p>Rule parser based on the <a href="https://github.com/hyperjumptech/grule-rule-engine">Grule</a> rule engine,
+mostly taken from <a href="https://github.com/abu-lang/goabu">goAbU</a>. The ANTLR grammars
+(<code>EcaruleParser.g4</code>, <code>EcaruleLexer.g4</code>, <code>Grulev3Parser.g4</code>) define the rule syntax; regenerate the
+Go parser with the module's <code>Makefile</code> after editing them.</p>
+<p><code>reservedWords.go</code> lists the identifiers that cannot be used as attribute names.</p>
+<h3 id="rosresources">rosresources<a class="headerlink" href="#rosresources" title="Permanent link">&para;</a></h3>
+<p>This module contains the implementations of the I/O managers of all the vehicles supported by
+Robo-AbU. The I/O manager is the gateway to the vehicle: it handles inputs from its sensors, via the
+<code>gatherInputs</code> function, and the output to its actuators, using <code>SendCommands</code>.</p>
+<p>All implementations <strong>must</strong> adhere to the <code>ROSresources</code> interface. See
+<a href="#adding-new-vehicles">adding new vehicles</a> for more information.</p>
+<p>Beyond the vehicle resources, the module also provides <code>BaseResource</code> (no hardware at all),
+<code>AlarmResource</code>, <code>HttpResource</code>, <code>TopicResource</code> and <code>ServiceResource</code> for integrating non-vehicle
+devices and services.</p>
+<h3 id="update">update<a class="headerlink" href="#update" title="Permanent link">&para;</a></h3>
+<p>Interface for Robo-AbU updates. Implementations should be their own module, as done by
+<a href="#eagerevaluation">eagerevaluation</a> and <a href="#lazyevaluation">lazyevaluation</a>.</p>
+<h3 id="utilities">utilities<a class="headerlink" href="#utilities" title="Permanent link">&para;</a></h3>
+<p>Generic utilities for other modules.</p>
+<h3 id="vehicles">vehicles<a class="headerlink" href="#vehicles" title="Permanent link">&para;</a></h3>
+<p>This module contains the Golang APIs for vehicles that are interfaced via messages, for example
+ROS 2 or MAVLink. Currently, we provide APIs for ArduPilot-based vehicles via
+<a href="../tools/gorosetta/">goROSetta</a>. Vehicles for existing <code>ROSresources</code> should adhere to the
+interfaces in <code>rosVehicle.go</code>, which also defines <code>BasicVehicleKeywords</code>, the default reserved
+attribute set.</p>
+<h3 id="wiretask">wireTask<a class="headerlink" href="#wiretask" title="Permanent link">&para;</a></h3>
+<p>Utilities for sending and receiving <code>RemoteTasks</code> via transactions — the serialized form a <code>for all</code>
+task takes on the wire between an agent and its peers.</p>
+<h3 id="executer">Executer<a class="headerlink" href="#executer" title="Permanent link">&para;</a></h3>
+<p><code>abuRosExecuter.go</code> and <code>abuRosGoRoutine.go</code> provide the core of the Robo-AbU implementation.
+Together, they make up the <code>Executer</code> module and implement the <code>Exec</code>, <code>Exec-F</code>, <code>Disc</code> and <code>Input</code>
+rules of the calculus. <code>abuRosCmd.go</code> dispatches the resulting commands to the I/O manager, and
+<code>builtinFunctions.go</code> holds the functions callable from within rules.</p>
+<h2 id="adding-new-vehicles">Adding new vehicles<a class="headerlink" href="#adding-new-vehicles" title="Permanent link">&para;</a></h2>
+<p>Support for a type of vehicle comes in the form of an implementation of the <code>ROSresources</code>
+interface. Optionally, specific vehicle Golang APIs can be implemented as part of the <code>vehicles</code>
+module; this is the expected practice when the vehicle only has message-based APIs (for example via
+MAVLink or ROS 2).</p>
+<p>For example, support for VTOLs should first come in the form of a new <code>ROSresources</code>
+implementation, while support for PX4 quadcopters should be a <code>vehicles.Copter</code> used by the already
+existing <code>CopterResource</code>.</p>
+<p>The attributes related to commands, sensors and actuators must be provided in the form of a string
+slice and assigned to the field <code>rosKeywords</code>. When initializing the vehicle resources, a default
+value for all these attributes should be set; see <code>CopterRosResource.go</code> for an example.</p>
+<div class="admonition important">
+<p class="admonition-title">An attribute with no default is invisible</p>
+<p><code>Modified</code> returns early unless the attribute is both present in <code>Resources</code> <strong>and</strong> listed in
+<code>rosKeywords</code>. An attribute missing either one is silently treated as an ordinary local
+attribute, and its command is never sent. This is why <code>land</code> exists in <code>CopterResources</code> but
+does nothing: it is not in <code>BasicVehicleKeywords</code>.</p>
+</div>
+<p>Additionally, vehicles can be easily extended by simply wrapping other implementations; see for
+example <code>argoCopterResource.go</code>, which extends <code>CopterResource</code> with <code>kalman_x</code> and <code>kalman_y</code>.</p>
+<h3 id="the-command-cycle">The command cycle<a class="headerlink" href="#the-command-cycle" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>When</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gatherInputs</code></td>
+<td>Continuously, in its own goroutine</td>
+<td>Polls the vehicle and pushes assignment strings into the inputs channel. Typically every 100 ms</td>
+</tr>
+<tr>
+<td><code>Modified(r string)</code></td>
+<td>During an <code>Exec</code>, per written attribute</td>
+<td>Tells the I/O manager which attributes are being modified, flagging the composite command they belong to</td>
+</tr>
+<tr>
+<td><code>SendCommands()</code></td>
+<td>At the end of an <code>Exec</code></td>
+<td>Sends every flagged command to the vehicle</td>
+</tr>
+<tr>
+<td><code>ResetCommands()</code></td>
+<td>After <code>SendCommands</code></td>
+<td>Clears the modification flags set by <code>Modified</code></td>
+</tr>
+</tbody>
+</table>
+<p>Splitting <code>Modified</code> from <code>SendCommands</code> is what makes composite commands work: <code>move</code> has the
+components <code>x</code>, <code>y</code> and <code>z</code>, so the manager waits to see which of them were written during the step
+and then sends a single command carrying all three. Group the components of a composite command in
+one <code>do</code> clause for this reason.</p>
+<p>Implementations of new vehicles for existing <code>ROSresources</code> must adhere to the interfaces found in
+<code>vehicles/rosVehicle.go</code>.</p>
+<h2 id="adding-a-new-agent">Adding a new agent<a class="headerlink" href="#adding-a-new-agent" title="Permanent link">&para;</a></h2>
+<p>Implement <code>RoboAbuAgent</code> in its own file under <code>agent/</code>. <code>Init</code> receives the local and remote
+namespaces, <code>ForAll</code> is handed the serialized task to broadcast, and <code>GetWirePool</code> returns the
+channel the executer drains. Look at <code>seqAgent.go</code> for the smallest complete example, and at
+<code>rosAgent.go</code> for the decentralized one.</p>
+<p>To make the new agent selectable from the tools, add a case to the agent construction in
+<a href="../tools/abumon/"><code>abumon</code></a>'s <code>main.go</code> and to <code>schema.AgentType</code> in
+<a href="../tools/abusim/"><code>abusim-core</code></a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1163 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for Robo-AbU, an ECA-rule DSL and runtime for distributed, event-driven robotic systems.">
+      
+      
+      
+      
+        <link rel="prev" href="../tools/">
+      
+      
+        <link rel="next" href="../abusim/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>AbU Monitor - Robo-AbU Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#abu-monitor" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Robo-AbU Docs" class="md-header__button md-logo" aria-label="Robo-AbU Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robo-AbU Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AbU Monitor
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Autonomous-Systems-Laboratory-UNIUD/AbU-ROS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Robo-AbU Docs" class="md-nav__button md-logo" aria-label="Robo-AbU Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Robo-AbU Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Autonomous-Systems-Laboratory-UNIUD/AbU-ROS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rabu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robo-AbU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AbU Monitor
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AbU Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#running" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#node-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Node configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rule-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rule configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#startup-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Startup sequence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoring API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sequencer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sequencer
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../abusim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AbU Simulator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gorosetta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    goROSetta/goMavUtil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#running" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#node-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Node configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rule-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rule configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#startup-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Startup sequence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoring API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sequencer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sequencer
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="abu-monitor">AbU Monitor<a class="headerlink" href="#abu-monitor" title="Permanent link">&para;</a></h1>
+<p>The AbU Monitor (<code>abumon</code>) is the tool for deploying and monitoring AbU nodes on single devices.
+It is packaged as a Docker Compose service, from the
+<a href="https://github.com/Autonomous-Systems-Laboratory-UNIUD/abumon-goabu-agent">abumon-goabu-agent</a>
+repository, and configured from the <code>abu-config</code> folder — which also holds a set of examples.</p>
+<p>One container is one AbU node. Put it on the companion computer next to the autopilot, point it at
+the autopilot's MAVLink endpoint, give it a rules file, and it joins the fleet on its own — there is
+no central component to register with.</p>
+<h2 id="running">Running<a class="headerlink" href="#running" title="Permanent link">&para;</a></h2>
+<p>From the directory containing <code>docker-compose.yaml</code>:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up
+</code></pre></div>
+<p>The compose file mounts your local <code>abu-config/</code> into the container and selects the config file
+through the <code>ABUCONFIG_PATH</code> environment variable:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">abumon</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lucagemolotto/abumon-agent</span>
+<span class="w">    </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sub1</span>
+<span class="w">    </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./abu-config:/home/aislab/agent/abumon-goabu-agent/abu-config</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./zenoh_bridge.json5.template:/home/aislab/agent/abumon-goabu-agent/zenoh_bridge.json5.template</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ABUCONFIG_PATH=/home/aislab/agent/abumon-goabu-agent/abu-config/config.yaml</span>
+</code></pre></div>
+<p><code>network_mode: host</code> matters: ROS 2 discovery and the MAVLink UDP endpoint both need the host's
+network. Set <code>hostname</code> to the node's identifier so logs are readable.</p>
+<p><code>ABUCONFIG_PATH</code> has no default — the agent exits immediately if it is unset.</p>
+<h2 id="node-configuration">Node configuration<a class="headerlink" href="#node-configuration" title="Permanent link">&para;</a></h2>
+<p>The AbU node is configured from a single YAML file, conventionally <code>abu-config/config.yaml</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Example value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td><code>"sub1"</code></td>
+<td>Unique identifier for the node. Used as the AbU local namespace and as the goROSetta node name</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>string</td>
+<td><code>"sub"</code></td>
+<td>The vehicle resource to instantiate. One of <code>basic</code>, <code>copter</code>, <code>argoCopter</code>, <code>sub</code>. (<code>plane</code> and <code>rover</code> are recognised but return <em>not yet supported</em>)</td>
+</tr>
+<tr>
+<td><code>tick</code></td>
+<td>duration</td>
+<td><code>50ms</code></td>
+<td>Delay between two <code>Exec</code> steps of the agent</td>
+</tr>
+<tr>
+<td><code>rules</code></td>
+<td>string (path)</td>
+<td><code>"/…/abu-config/rules.yaml"</code></td>
+<td>Path to the YAML file containing the node's rules, <strong>as seen inside the container</strong></td>
+</tr>
+<tr>
+<td><code>memory</code></td>
+<td>object</td>
+<td>—</td>
+<td>The node's initial memory, organised by data type</td>
+</tr>
+<tr>
+<td><code>memory.Text</code></td>
+<td>object</td>
+<td>—</td>
+<td>Text/string variables. Each key is a variable name, each value a string</td>
+</tr>
+<tr>
+<td><code>memory.Bool</code></td>
+<td>object</td>
+<td>—</td>
+<td>Boolean variables, <code>true</code> or <code>false</code></td>
+</tr>
+<tr>
+<td><code>memory.Integer</code></td>
+<td>object</td>
+<td>—</td>
+<td>Integer variables</td>
+</tr>
+<tr>
+<td><code>memory.Float</code></td>
+<td>object</td>
+<td>—</td>
+<td>Floating-point variables</td>
+</tr>
+<tr>
+<td><code>autopilot</code></td>
+<td>object</td>
+<td>—</td>
+<td>How to reach the autopilot. Only used for vehicle types</td>
+</tr>
+<tr>
+<td><code>autopilot.addr</code></td>
+<td>string</td>
+<td><code>"0.0.0.0"</code></td>
+<td>Address the MAVLink UDP server binds to</td>
+</tr>
+<tr>
+<td><code>autopilot.port</code></td>
+<td>integer</td>
+<td><code>14551</code></td>
+<td>MAVLink port</td>
+</tr>
+<tr>
+<td><code>autopilot.id</code></td>
+<td>integer</td>
+<td><code>1</code></td>
+<td>MAVLink system ID of the vehicle, 1–255</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title"><code>tick</code> must carry a unit</p>
+<p><code>Tick</code> is a Go <code>time.Duration</code>, so it has to be written with a unit — <code>50ms</code>, <code>1s</code>. A bare
+integer is <strong>not</strong> accepted: <code>tick: 50</code> fails to unmarshal with
+<em>cannot unmarshal !!int <code>50</code> into time.Duration</em>, and the agent exits reporting it.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Copy from <code>config.yaml</code> or <code>config_template.yaml</code></p>
+<p>The older <code>config_example.yaml</code> and <code>config_old.yaml</code> still say <code>tick_rate</code> and <code>autopilot.ip</code>.
+Unknown keys are dropped <strong>silently</strong>, so a config following those starts with a tick of <code>0</code> — a
+busy <code>Exec</code> loop — and an empty autopilot address.</p>
+</div>
+<p><code>memory.Text.id</code> is not optional for vehicle types: it is what the agent passes as the vehicle
+identifier when constructing the goROSetta node. Set it to the same value as the top-level <code>id</code>.</p>
+<p>Reserved <a href="../../rabu/#default-physical-attributes">physical attributes</a> do not need to be declared —
+the vehicle resource provides them, with defaults. Declare only your own attributes here.</p>
+<h3 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
+<p>A configuration for an <code>argoCopter</code> called <code>cop1</code> which runs an <code>Exec</code> every 50 ms and has a <code>Text</code>
+attribute <code>foo</code> with value <code>"a"</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="s">"cop1"</span>
+<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">"argoCopter"</span>
+<span class="nt">tick</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50ms</span>
+<span class="nt">rules</span><span class="p">:</span><span class="w"> </span><span class="s">"/home/aislab/agent/abumon-goabu-agent/abu-config/rules.yaml"</span>
+<span class="nt">memory</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">Text</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="s">"cop1"</span>
+<span class="w">    </span><span class="nt">foo</span><span class="p">:</span><span class="w"> </span><span class="s">"a"</span>
+
+<span class="nt">autopilot</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">addr</span><span class="p">:</span><span class="w"> </span><span class="s">"0.0.0.0"</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">14551</span>
+<span class="w">  </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</code></pre></div>
+<h2 id="rule-configuration">Rule configuration<a class="headerlink" href="#rule-configuration" title="Permanent link">&para;</a></h2>
+<p>The rules file named by <code>rules:</code> is a <strong>flat YAML list</strong> of rule objects — one list item per rule.</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;string&gt;</span><span class="w">        </span><span class="c1"># required — identifier for the rule</span>
+<span class="w">  </span><span class="nt">event</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;string&gt;</span><span class="w">       </span><span class="c1"># required — attribute(s) that trigger the rule, space-separated</span>
+<span class="w">  </span><span class="nt">condtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;integer&gt;</span><span class="w">   </span><span class="c1"># required — 0 for a local task (`for`), 1 for a remote task (`for all`)</span>
+<span class="w">  </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;string&gt;</span><span class="w">   </span><span class="c1"># required — boolean expression, e.g. "mode == \"GUIDED\""</span>
+<span class="w">  </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;string&gt;</span><span class="w">      </span><span class="c1"># required — assignments, e.g. "set_mode = \"GUIDED\""</span>
+</code></pre></div>
+<p>Each entry is assembled into the rule string
+<code>rule &lt;name&gt; on &lt;event&gt; for|for all &lt;condition&gt; do &lt;action&gt;</code>, so anything valid in the
+<a href="../../rabu/#syntax">Robo-AbU syntax</a> is valid here. Remember to escape the double quotes around
+string literals.</p>
+<h3 id="example_1">Example<a class="headerlink" href="#example_1" title="Permanent link">&para;</a></h3>
+<p>A set of rules to start a copter and take off to 8 meters:</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"InitRule"</span>
+<span class="w">  </span><span class="nt">event</span><span class="p">:</span><span class="w"> </span><span class="s">"foo"</span>
+<span class="w">  </span><span class="nt">condtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="s">"\"abc\"</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">foo"</span>
+<span class="w">  </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="s">"init</span><span class="nv"> </span><span class="s">=</span><span class="nv"> </span><span class="s">true"</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"ModeRule"</span>
+<span class="w">  </span><span class="nt">event</span><span class="p">:</span><span class="w"> </span><span class="s">"init"</span>
+<span class="w">  </span><span class="nt">condtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="s">"true</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">init"</span>
+<span class="w">  </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="s">"set_mode</span><span class="nv"> </span><span class="s">=</span><span class="nv"> </span><span class="s">\"GUIDED\""</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"ArmRule"</span>
+<span class="w">  </span><span class="nt">event</span><span class="p">:</span><span class="w"> </span><span class="s">"mode"</span>
+<span class="w">  </span><span class="nt">condtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="s">"mode</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">\"GUIDED\""</span>
+<span class="w">  </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="s">"set_arm</span><span class="nv"> </span><span class="s">=</span><span class="nv"> </span><span class="s">true"</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"TakeOffRule"</span>
+<span class="w">  </span><span class="nt">event</span><span class="p">:</span><span class="w"> </span><span class="s">"arm"</span>
+<span class="w">  </span><span class="nt">condtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="s">"arm</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">true"</span>
+<span class="w">  </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="s">"take_off</span><span class="nv"> </span><span class="s">=</span><span class="nv"> </span><span class="s">8.0"</span>
+</code></pre></div>
+<p>Nothing happens until something writes <code>foo</code>. The agent injects <code>foo = "abc"</code> itself 45 seconds
+after startup, which is the built-in bootstrap; drive it yourself instead if you need a different
+trigger.</p>
+<p>The shipped <code>abu-config/</code> contains several ready-made rulesets worth reading: <code>rules_complete.yaml</code>,
+<code>rules_geofence.yaml</code>, <code>rules_no_kalman.yaml</code> and <code>rules_sub.yaml</code>.</p>
+<h2 id="startup-sequence">Startup sequence<a class="headerlink" href="#startup-sequence" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Read <code>ABUCONFIG_PATH</code>, load the node configuration.</li>
+<li>Load and parse the rules file.</li>
+<li>Create a <code>rosAgent</code> — <code>abumon</code> always uses the decentralized 2PC transaction manager.</li>
+<li>Build the memory for the configured <code>type</code>, seeded from <code>memory:</code>.</li>
+<li>Build the <code>RosExecuter</code> with namespace <code>aburos</code> and <strong>lazy</strong> evaluation.</li>
+<li>For vehicle types, create the goROSetta node against <code>autopilot</code>, retrying up to 4 times with a
+   short backoff. If every attempt fails, the agent exits.</li>
+<li>Loop: <code>Exec()</code>, then sleep for <code>tick</code>.</li>
+</ol>
+<h2 id="monitoring-api">Monitoring API<a class="headerlink" href="#monitoring-api" title="Permanent link">&para;</a></h2>
+<p>The repository contains an mTLS-protected HTTP server exposing the node's state:</p>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET /api/connect</code></td>
+<td><code>ConnectionInfo</code> — name, type, memory, update pool and rules</td>
+</tr>
+<tr>
+<td><code>GET /api/memory</code></td>
+<td><code>NodeMemoryRes</code> — memory, update pool and running status</td>
+</tr>
+<tr>
+<td><code>GET /api/log</code></td>
+<td>The node's most recent log file</td>
+</tr>
+</tbody>
+</table>
+<p>It listens on <code>127.0.0.1:31337</code>, requires a client certificate signed by the AbU root CA
+(<code>RequireAndVerifyClientCert</code>, TLS ≥ 1.2), and reads its certificates from <code>./certs/</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Currently disabled</p>
+<p>The call that starts this server is commented out in the agent's <code>main.go</code>, so a stock
+<code>abumon</code> container does not listen on 31337. Re-enable <code>server.NewAbumonServer</code> and provide the
+certificates to use it.</p>
+</div>
+<h2 id="sequencer">Sequencer<a class="headerlink" href="#sequencer" title="Permanent link">&para;</a></h2>
+<p>If you want to run nodes against the centralized sequencer (<code>seqAgent</code>) instead of decentralized
+2PC, a ROS 2 service implementing the sequencer is published as a Docker image:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>pull<span class="w"> </span>lucagemolotto/abumon-sequencer
+</code></pre></div>
+<p>Nodes then request a sequence number from <code>/aburos/request_sequence</code> and publish their transactions
+with that number attached. See <a href="../../contributing/#agent">agent</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

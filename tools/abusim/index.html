@@ -1,0 +1,1137 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for Robo-AbU, an ECA-rule DSL and runtime for distributed, event-driven robotic systems.">
+      
+      
+      
+      
+        <link rel="prev" href="../abumon/">
+      
+      
+        <link rel="next" href="../gorosetta/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>AbU Simulator - Robo-AbU Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#abu-simulator" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Robo-AbU Docs" class="md-header__button md-logo" aria-label="Robo-AbU Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robo-AbU Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AbU Simulator
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Autonomous-Systems-Laboratory-UNIUD/AbU-ROS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Robo-AbU Docs" class="md-nav__button md-logo" aria-label="Robo-AbU Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Robo-AbU Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Autonomous-Systems-Laboratory-UNIUD/AbU-ROS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rabu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robo-AbU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../abumon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AbU Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AbU Simulator
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AbU Simulator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#running" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coordinator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coordinator
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Coordinator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nodes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rulesets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rulesets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simulation-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simulation control
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UI
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gorosetta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    goROSetta/goMavUtil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#running" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coordinator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coordinator
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Coordinator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nodes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rulesets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rulesets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simulation-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simulation control
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UI
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="abu-simulator">AbU Simulator<a class="headerlink" href="#abu-simulator" title="Permanent link">&para;</a></h1>
+<p>For simulation purposes we also provide a centralized simulator, called <code>abusim</code>. Unlike
+<a href="../abumon/">abumon</a>, where each node is configured from a file and boots on its own, <code>abusim</code> puts a
+coordinator in charge of the whole fleet: it spawns and destroys agent containers on demand, proxies
+inputs into them, reads their memory back out, and serves a web UI over the lot.</p>
+<p>It is made up of three components:</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Repository</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>abusim-coordinator</code></td>
+<td><a href="https://github.com/Autonomous-Systems-Laboratory-UNIUD/abusim-core">abusim-core</a></td>
+<td>Owns the simulation: Docker orchestration, HTTP API, and the UI</td>
+</tr>
+<tr>
+<td><code>abusim-agent</code></td>
+<td><a href="https://github.com/Autonomous-Systems-Laboratory-UNIUD/abusim-goabu-agent">abusim-goabu-agent</a></td>
+<td>One AbU node, one container, spawned by the coordinator</td>
+</tr>
+<tr>
+<td>AbU-sim UI</td>
+<td><a href="https://github.com/Autonomous-Systems-Laboratory-UNIUD/AbU-UI">AbU-UI</a></td>
+<td>Web front-end, served by the coordinator</td>
+</tr>
+</tbody>
+</table>
+<h2 id="running">Running<a class="headerlink" href="#running" title="Permanent link">&para;</a></h2>
+<p>The coordinator needs the Docker socket — it spawns containers — and an external control network.</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>abusim-default-control
+docker<span class="w"> </span>compose<span class="w"> </span>up
+</code></pre></div>
+<p><code>docker-compose.yaml</code> brings up the coordinator on port <strong>4000</strong> alongside a Zenoh router on 7447
+and 8000. <code>AGENT_TYPE</code> selects the <a href="../../contributing/#agent">transaction manager</a> all nodes will
+use:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">environment</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DOCKER_HOST=unix:///var/run/docker.sock</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AGENT_TYPE=D2PC</span><span class="w">      </span><span class="c1"># D2PC | SEQ | ABCAST</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Agent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>D2PC</code></td>
+<td>Decentralized 2PC (<code>rosAgent</code>) — the default</td>
+</tr>
+<tr>
+<td><code>SEQ</code></td>
+<td>Centralized sequencer (<code>seqAgent</code>). The coordinator can start the sequencer container itself</td>
+</tr>
+<tr>
+<td><code>ABCAST</code></td>
+<td>ISIS atomic broadcast (<code>abCast</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>On startup the coordinator creates a second network, <code>abusim-default</code>, and joins every agent it
+spawns to it.</p>
+<h2 id="agent">Agent<a class="headerlink" href="#agent" title="Permanent link">&para;</a></h2>
+<p>Agents get their configuration on startup via an <code>AgentConfiguration</code> provided through the
+environment, Base64-encoded. You never write one by hand — the coordinator builds it from the node
+you added and passes it in.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">AgentConfiguration</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">             </span><span class="kt">string</span><span class="w">                    </span><span class="c1">// node identifier</span>
+<span class="w">    </span><span class="nx">MemoryController</span><span class="w"> </span><span class="kt">string</span><span class="w">                    </span><span class="c1">// vehicle type</span>
+<span class="w">    </span><span class="nx">Memory</span><span class="w">           </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="w"> </span><span class="c1">// initial memory, by type</span>
+<span class="w">    </span><span class="nx">Rules</span><span class="w">            </span><span class="p">[]</span><span class="kt">string</span><span class="w">                  </span><span class="c1">// flattened from the node's rulesets</span>
+<span class="w">    </span><span class="nx">Endpoints</span><span class="w">        </span><span class="p">[]</span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Tick</span><span class="w">             </span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="w">             </span><span class="c1">// fixed at 10ms by the coordinator</span>
+<span class="w">    </span><span class="nx">SimAddr</span><span class="w">          </span><span class="kt">string</span><span class="w">                    </span><span class="c1">// SITL address</span>
+<span class="w">    </span><span class="nx">SimPort</span><span class="w">          </span><span class="kt">int</span><span class="w">                       </span><span class="c1">// SITL port, allocated from 14560 upwards</span>
+<span class="w">    </span><span class="nx">SimID</span><span class="w">            </span><span class="kt">uint8</span><span class="w">                     </span><span class="c1">// MAVLink system ID</span>
+<span class="w">    </span><span class="nx">AgentType</span><span class="w">        </span><span class="nx">AgentType</span><span class="w">                 </span><span class="c1">// D2PC | SEQ | ABCAST</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Supported memory controllers are <code>basic</code>, <code>copter</code> and <code>sub</code>. <code>plane</code> and <code>rover</code> are recognised but
+return <em>not yet supported</em> — see <a href="../../rabu/#supported-vehicles">supported vehicles</a>.</p>
+<p>Each node is allocated a SITL port from <code>14560</code> upwards, in the order nodes are added, and a
+matching MAVLink system ID. <code>GET /api/sim/resetport</code> resets that counter — useful after tearing a
+simulation down and rebuilding it.</p>
+<h2 id="coordinator">Coordinator<a class="headerlink" href="#coordinator" title="Permanent link">&para;</a></h2>
+<p>The coordinator manages the agents, spawning and deleting their containers. It also acts as a proxy
+for <code>Input</code> rules and for reading node state. It can be interacted with via the <a href="#ui">UI</a>, or
+directly over its JSON/HTTP API on port 4000.</p>
+<h3 id="nodes">Nodes<a class="headerlink" href="#nodes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Endpoint</th>
+<th>Body / response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Add nodes</td>
+<td><code>POST /api/nodes</code></td>
+<td><strong>An array</strong> of <code>NodeConfig</code>. Nodes are created in order, ~2 s apart</td>
+</tr>
+<tr>
+<td>Remove a node</td>
+<td><code>DELETE /api/nodes/:id</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>List nodes</td>
+<td><code>GET /api/nodes</code></td>
+<td>Array of <code>NodeConfig</code></td>
+</tr>
+<tr>
+<td>All node states</td>
+<td><code>GET /api/nodes/memory</code></td>
+<td>Map of id → <code>NodeState</code></td>
+</tr>
+<tr>
+<td>One node's state</td>
+<td><code>GET /api/nodes/memory/:id</code></td>
+<td><code>NodeState</code></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code>// NodeConfig
+{
+  "id":       "cop1",
+  "type":     "copter",              // basic | copter | sub
+  "ruleSets": ["takeoff", "patrol"], // names of rulesets already added
+  "memory":   { "foo": "a", "base_alt": 0.0, "detection_picker": true },
+  "running":  false
+}
+</code></pre></div>
+<p><code>memory</code> here is <strong>flat</strong>, not grouped by type as in <code>abumon</code>: the coordinator infers the AbU type
+from the JSON type of each value — string → <code>Text</code>, bool → <code>Bool</code>, number → <code>Float</code>. The key
+<code>identifier</code> is special-cased to <code>Integer</code>.</p>
+<p>Rulesets must be added <strong>before</strong> the node that references them; <code>AddNode</code> fails if a named set is
+unknown.</p>
+<div class="highlight"><pre><span></span><code>// NodeState
+{
+  "memory":  { "altitude": 5.0, "mode": "GUIDED" },
+  "pool":    [ /* pending updates */ ],
+  "running": true
+}
+</code></pre></div>
+<h3 id="rulesets">Rulesets<a class="headerlink" href="#rulesets" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Endpoint</th>
+<th>Body / response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Add a ruleset</td>
+<td><code>POST /api/rulesets</code></td>
+<td><code>RuleSet</code></td>
+</tr>
+<tr>
+<td>Remove a ruleset</td>
+<td><code>DELETE /api/rulesets/:id</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>List rulesets</td>
+<td><code>GET /api/rulesets</code></td>
+<td>Map of name → array of <code>RuleConfig</code></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code>// RuleSet
+{
+  "name": "takeoff",
+  "rules": [
+    {
+      "name":      "ArmRule",
+      "event":     "mode",
+      "condtype":  0,                      // 0 = local (`for`), 1 = remote (`for all`)
+      "condition": "mode == \"GUIDED\"",
+      "action":    "set_arm = true"
+    }
+  ]
+}
+</code></pre></div>
+<p>Each <code>RuleConfig</code> is assembled into <code>rule &lt;name&gt; on &lt;event&gt; for|for all &lt;condition&gt; do &lt;action&gt;</code> —
+the same shape as an <a href="../abumon/#rule-configuration">abumon rules file</a>, so rules move between the
+two unchanged.</p>
+<h3 id="simulation-control">Simulation control<a class="headerlink" href="#simulation-control" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Endpoint</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start one node</td>
+<td><code>GET /api/sim/start/:id</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Stop one node</td>
+<td><code>GET /api/sim/stop/:id</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Start all nodes</td>
+<td><code>GET /api/sim/start</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Stop all nodes</td>
+<td><code>GET /api/sim/stop</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Node logs</td>
+<td><code>GET /api/sim/logs/:id</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Send an input</td>
+<td><code>POST /api/sim/input/:id</code></td>
+<td>Array of <code>[name, value]</code> pairs</td>
+</tr>
+<tr>
+<td>Reset port allocation</td>
+<td><code>GET /api/sim/resetport</code></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>An input is a list of two-element arrays, which the coordinator turns into an AbU assignment string
+and forwards to the node's <code>Input</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[[</span><span class="s2">"foo"</span><span class="p">,</span><span class="w"> </span><span class="s2">"abc"</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"base_alt"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"armed"</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">]]</span>
+</code></pre></div>
+<p>Values may be strings, numbers or booleans; anything else is rejected.</p>
+<h2 id="ui">UI<a class="headerlink" href="#ui" title="Permanent link">&para;</a></h2>
+<p>The UI is served by the <code>abusim-coordinator</code> itself, as static files, at
+<strong><a href="http://localhost:4000/">http://localhost:4000/</a></strong>. It serves as both a monitor and a controller for the simulation.</p>
+<p>It provides a way to add and remove nodes, monitor their attributes live, and manage rules via
+rulesets. Execution of nodes can then be started and stopped, individually or all at once.</p>
+<p>The UI is a thin client over the API above, so anything it can do can equally be scripted.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
