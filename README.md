@@ -1,7 +1,7 @@
 # rabu-wiki
 
 Documentation for **Robo-AbU** — an ECA-rule DSL and runtime for distributed, event-driven robotic
-systems, developed at the [Autonomous Systems Laboratory, University of
+systems, developed in collobation with [MADS Laboratory](https://mads.uniud.it) and the [Autonomous Systems Laboratory, University of
 Udine](https://github.com/Autonomous-Systems-Laboratory-UNIUD).
 
 The published site: <https://lucagemolotto.github.io/rabu-wiki/>
