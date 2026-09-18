@@ -50,14 +50,3 @@ One rule. Every node in range that can pick up the object learns where it is.
 * An ArduPilot vehicle or SITL instance, reachable over MAVLink
 
 See [Setup](contributing.md#setup) for the full build procedure.
-
-## Building these docs
-
-```bash
-pip install mkdocs-material
-mkdocs serve    # live-reloading preview on http://127.0.0.1:8000
-mkdocs build    # static site into site/
-```
-
-Pushes to `main` are published to GitHub Pages by
-[`.github/workflows/deploy.yaml`](https://github.com/lucagemolotto/rabu-wiki/blob/main/.github/workflows/deploy.yaml).
